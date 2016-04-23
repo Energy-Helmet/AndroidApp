@@ -19,6 +19,8 @@ import com.punchthrough.bean.sdk.message.ScratchBank;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -65,14 +67,20 @@ public class MainActivity extends AppCompatActivity {
                                     Log.w(TAG, deviceInfo.softwareVersion());
                                 }
                             });
-                            bean.readAcceleration(new Callback<Acceleration>() {
+
+                            new Timer().scheduleAtFixedRate(new TimerTask() {
                                 @Override
-                                public void onResult(Acceleration result) {
-                                    xField.setText(Double.toString(result.x()));
-                                    yField.setText(Double.toString(result.y()));
-                                    zField.setText(Double.toString(result.z()));
+                                public void run() {
+                                    bean.readAcceleration(new Callback<Acceleration>() {
+                                        @Override
+                                        public void onResult(Acceleration result) {
+                                        xField.setText(Double.toString(result.x()));
+                                        yField.setText(Double.toString(result.y()));
+                                        zField.setText(Double.toString(result.z()));
+                                        }
+                                    });
                                 }
-                            });
+                            }, 0, 250);
 
                         }
 
