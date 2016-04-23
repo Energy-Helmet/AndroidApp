@@ -74,9 +74,9 @@ public class MainActivity extends AppCompatActivity {
                                     bean.readAcceleration(new Callback<Acceleration>() {
                                         @Override
                                         public void onResult(Acceleration result) {
-                                        xField.setText(Double.toString(result.x()));
-                                        yField.setText(Double.toString(result.y()));
-                                        zField.setText(Double.toString(result.z()));
+                                            xField.setText("x:" + String.format("%.6f", result.x()));
+                                            yField.setText("y:" + String.format("%.6f", result.y()));
+                                            zField.setText("z:" + String.format("%.6f", result.z()));
                                         }
                                     });
                                 }
