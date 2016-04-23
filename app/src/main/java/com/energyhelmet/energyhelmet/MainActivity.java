@@ -1,9 +1,11 @@
 package com.energyhelmet.energyhelmet;
 
 import android.content.Context;
+import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.punchthrough.bean.sdk.Bean;
 import com.punchthrough.bean.sdk.BeanDiscoveryListener;
@@ -27,9 +29,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final TextView xField;
+        final TextView yField;
+        final TextView zField;
+
         final List<Bean> beans = new ArrayList<>();
 
         final Context self = this;
+
+        xField = (TextView) findViewById(R.id.x_field);
+        yField = (TextView) findViewById(R.id.y_field);
+        zField = (TextView) findViewById(R.id.z_field);
 
         BeanDiscoveryListener listener = new BeanDiscoveryListener() {
             @Override
@@ -58,9 +68,9 @@ public class MainActivity extends AppCompatActivity {
                             bean.readAcceleration(new Callback<Acceleration>() {
                                 @Override
                                 public void onResult(Acceleration result) {
-                                    Log.w(TAG, Double.toString(result.x()));
-                                    Log.w(TAG, Double.toString(result.y()));
-                                    Log.w(TAG, Double.toString(result.z()));
+                                    xField.setText(Double.toString(result.x()));
+                                    yField.setText(Double.toString(result.y()));
+                                    zField.setText(Double.toString(result.z()));
                                 }
                             });
 

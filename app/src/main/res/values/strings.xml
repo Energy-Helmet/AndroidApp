@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Energy Helmet</string>
+    <string name="string_loading">Loading...</string>
 </resources>
